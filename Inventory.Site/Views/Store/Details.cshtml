@@ -1,0 +1,84 @@
+﻿@model Inventory.Site.ViewModels.StoreViewModel
+
+<div>
+    <h4>Tienda - Detalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+    <div>
+        <hr />
+        <h4>Artículos</h4>
+        <p>
+            @Html.ActionLink("Nuevo artículo", "Create", "Article", new { storeId = Model.StoreID }, new { })
+        </p>
+        <dl class="dl-horizontal">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articles[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articles[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articles[0].Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articles[0].TotalInShelf)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articles[0].TotalInVault)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Articles) {
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Name)*@
+                            @Html.ActionLink(item.Name, "Details", "Article", new { id = item.ArticleID }, new { })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalInShelf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalInVault)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Editar", "Edit", "Article", new { id = item.ArticleID }, new { }) |*@
+                            @*@Html.ActionLink("Detalle", "Details", "Article", new { id = item.ArticleID }, new { }) |*@
+                            @Html.ActionLink(" ", "Delete", "Article", new { id = item.ArticleID }, new { @class = "glyphicon glyphicon-trash" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </dl>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.StoreID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>
